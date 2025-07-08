@@ -107,7 +107,7 @@ export function GenerateurFormesGeo() {
               </div>
               <Slider
                 id="repetitions"
-                min={1}
+                min={2}
                 max={20}
                 step={1}
                 value={[repetitions]}
@@ -176,7 +176,7 @@ export function GenerateurFormesGeo() {
               <Input
                 id="repetitionsInput"
                 type="number"
-                min={1}
+                min={2}
                 max={50}
                 value={repetitions}
                 onChange={(e) => setRepetitions(Number.parseInt(e.target.value) || 1)}
