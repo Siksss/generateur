@@ -1,6 +1,7 @@
 from flask import Flask, request, send_file
 from flask_cors import CORS
-from generateur import generateur_png
+from generateur import generateur
+from generateur import generateurFS
 from generateur_fractale import generateur_fractale_koch
 
 app = Flask(__name__)
@@ -9,9 +10,20 @@ CORS(app)
 @app.route("/generer", methods=["POST"])
 def generer():
     data = request.get_json()
-    image_io = generateur_png(
+    image_io = generateur(
         int(data["nbr_cote"]),
         int(data["nbr_rep"]),
+        int(data["taille"]),
+        int(data["angle"]),
+        data["couleur"]
+    )
+    return send_file(image_io, mimetype="image/png")
+
+@app.route("/generer_formes_simples", methods=["POST"])
+def generer_formes_simples():
+    data = request.get_json()
+    image_io = generateurFS(
+        int(data["nbr_cote"]),
         int(data["taille"]),
         int(data["angle"]),
         data["couleur"]

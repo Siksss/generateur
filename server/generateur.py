@@ -5,7 +5,7 @@ import os
 import uuid
 from PIL import Image
 
-def generateur_png(nbr_cote, nbr_rep, taille, angle, couleur, reduction=0.9):
+def generateur(nbr_cote, nbr_rep, taille, angle, couleur, reduction=0.9):
     turtle.TurtleScreen._RUNNING = True
     screen = turtle.Screen()
     screen.setup(width=500, height=500)
@@ -17,7 +17,7 @@ def generateur_png(nbr_cote, nbr_rep, taille, angle, couleur, reduction=0.9):
     for i in range(nbr_rep):
         current_taille = taille * (reduction ** i)
         current_angle = angle * i
-        
+
         coords = []
         for j in range(nbr_cote + 1):
             theta = 2 * math.pi * j / nbr_cote + math.radians(current_angle)
@@ -46,7 +46,41 @@ def generateur_png(nbr_cote, nbr_rep, taille, angle, couleur, reduction=0.9):
 
     return output
 
+def generateurFS(nbr_cote, taille, angle, couleur, reduction=0.9):
+    turtle.TurtleScreen._RUNNING = True
+    screen = turtle.Screen()
+    screen.setup(width=500, height=500)
+    t = turtle.Turtle()
+    t.hideturtle()
+    t.speed(0)
+    t.pencolor(couleur)
+    coords = []
+    for j in range(nbr_cote + 1):
+        theta = 2 * math.pi * j / nbr_cote + math.radians(angle)
+        x = taille * math.cos(theta)
+        y = taille * math.sin(theta)
+        coords.append((x, y))
 
+    t.penup()
+    t.goto(coords[0])
+    t.pendown()
+    for (x, y) in coords[1:]:
+        t.goto(x, y)
+
+    filename = f"temp_{uuid.uuid4().hex}.ps"
+    canvas = screen.getcanvas()
+    canvas.postscript(file=filename, colormode='color')
+
+    turtle.bye()
+
+    with Image.open(filename) as image:
+        output = io.BytesIO()
+        image.save(output, format="PNG")
+        output.seek(0)
+
+    os.remove(filename)
+
+    return output
 
 
 

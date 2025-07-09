@@ -8,10 +8,9 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-export function GenerateurFormesGeo() {
+export function GenerateurFormesSimples() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [sides, setSides] = useState(5)
-  const [repetitions, setRepetitions] = useState(2)
   const [rotation, setRotation] = useState(0)
   const [size, setSize] = useState(100)
   const [color, setColor] = useState("#6366f1")
@@ -29,7 +28,6 @@ export function GenerateurFormesGeo() {
 
   const handleRandomize = () => {
     setSides(Math.floor(Math.random() * 10) + 3)
-    setRepetitions(Math.floor(Math.random() * 10) + 1)
     setRotation(Math.floor(Math.random() * 360))
     setSize(Math.floor(Math.random() * 150) + 50)
     setColor(
@@ -39,14 +37,13 @@ export function GenerateurFormesGeo() {
     )
   }
   const handleFlaskGenerate = async () => {
-    const response = await fetch("http://localhost:5000/generer", {
+    const response = await fetch("http://localhost:5000/generer_formes_simples", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         nbr_cote: sides,
-        nbr_rep: repetitions,
         taille: size,
         angle: rotation,
         couleur: color,
@@ -103,20 +100,6 @@ export function GenerateurFormesGeo() {
 
             <div className="space-y-2">
               <div className="flex justify-between">
-                <Label htmlFor="repetitions">Répétitions: {repetitions}</Label>
-              </div>
-              <Slider
-                id="repetitions"
-                min={2}
-                max={20}
-                step={1}
-                value={[repetitions]}
-                onValueChange={(value) => setRepetitions(value[0])}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex justify-between">
                 <Label htmlFor="rotation">Angle de rotation: {rotation}°</Label>
               </div>
               <Slider
@@ -168,18 +151,6 @@ export function GenerateurFormesGeo() {
                 max={100}
                 value={sides}
                 onChange={(e) => setSides(Number.parseInt(e.target.value) || 3)}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="repetitionsInput">Répétitions (précis)</Label>
-              <Input
-                id="repetitionsInput"
-                type="number"
-                min={2}
-                max={50}
-                value={repetitions}
-                onChange={(e) => setRepetitions(Number.parseInt(e.target.value) || 1)}
               />
             </div>
 

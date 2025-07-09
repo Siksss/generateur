@@ -1,4 +1,4 @@
-import { GenerateurFormesGeo } from "@/components/generateur_formes"
+import { GenerateurFormesSimples } from "@/components/generateur_formes_simples"
 import Navbar from "@/components/Navbar"
 
 export default function About() {
@@ -9,7 +9,7 @@ export default function About() {
             <Navbar />
           </header>
           <div className="w-full max-w-5xl">
-            <GenerateurFormesGeo />
+            <GenerateurFormesSimples />
           </div>
         </main>
       )
