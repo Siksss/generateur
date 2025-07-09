@@ -1,13 +1,11 @@
-import { GenerateurFormesGeo } from "@/components/generateur_formes"
-import Navbar from "@/components/Navbar"
-
+import "./main.css"
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center pt-7 justify-between p-4 md:p-8">
-      <div className="w-full max-w-5xl">
-        <Navbar />
-        <GenerateurFormesGeo />
+    <main className="main">
+      <div className="mainDiv">
+        <h1 className="bigTitle"><span className="welcomeTexjt">Bienvenue</span> sur GenerGeo </h1>
+        <img className="logo" src="/images/logo1.png" alt="Logo" width={400} height={400} />
       </div>
     </main>
   )
