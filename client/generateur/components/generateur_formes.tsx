@@ -17,16 +17,6 @@ export function GenerateurFormesGeo() {
   const [color, setColor] = useState("#6366f1")
   const [imageURL, setImageURL] = useState<string | null>(null);
 
-  const handleExport = () => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const link = document.createElement("a")
-    link.download = "forme-geometrique.png"
-    link.href = canvas.toDataURL("image/png")
-    link.click()
-  }
-
   const handleRandomize = () => {
     setSides(Math.floor(Math.random() * 10) + 3)
     setRepetitions(Math.floor(Math.random() * 10) + 1)
@@ -200,9 +190,6 @@ export function GenerateurFormesGeo() {
         <div className="flex gap-2">
           <Button onClick={handleRandomize} className="flex-1">
             Aléatoire
-          </Button>
-          <Button onClick={handleExport} variant="outline" className="flex-1">
-            Exporter PNG
           </Button>
           <Button onClick={handleFlaskGenerate} variant="secondary" className="flex-1">
             Générer via Flask
