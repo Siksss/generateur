@@ -136,7 +136,7 @@ export function GenerateurFractales() {
             Aléatoire
           </Button>
           <Button onClick={handleFlaskGenerate} variant="secondary" className="flex-1">
-            Générer via Flask
+            Générer
           </Button>
         </div>
       </div>
