@@ -14,7 +14,7 @@ export function GenerateurFractales() {
   const [size, setSize] = useState(100)
   const [color, setColor] = useState("#6366f1")
   const [imageURL, setImageURL] = useState<string | null>(null);
-
+  // Fonction aleatoire
   const handleRandomize = () => {
     setRepetitions(Math.floor(Math.random() * 10) + 1)
     setSize(Math.floor(Math.random() * 150) + 50)
@@ -24,6 +24,7 @@ export function GenerateurFractales() {
         .padStart(6, "0")}`,
     )
   }
+  // Envoie une requete POST à Flask pour generer le motif
   const handleFlaskGenerate = async () => {
     const response = await fetch("http://localhost:5000/generer_fractales", {
       method: "POST",
@@ -49,6 +50,7 @@ export function GenerateurFractales() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* Partie qui gere l'image */}
       <Card className="md:col-span-2">
         <CardContent className="p-6">
           <div className="flex justify-center items-center bg-gray-50 rounded-lg p-4">
@@ -63,7 +65,7 @@ export function GenerateurFractales() {
           </div>
         </CardContent>
       </Card>
-
+      {/* Partie qui gere les parametres */}
       <div className="space-y-6">
         <Tabs defaultValue="basic" className="w-full">
           <TabsList className="grid w-full grid-cols-2">

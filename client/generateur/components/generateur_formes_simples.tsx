@@ -15,7 +15,7 @@ export function GenerateurFormesSimples() {
   const [size, setSize] = useState(100)
   const [color, setColor] = useState("#6366f1")
   const [imageURL, setImageURL] = useState<string | null>(null);
-
+  // Fonction aleatoire
   const handleRandomize = () => {
     setSides(Math.floor(Math.random() * 10) + 3)
     setRotation(Math.floor(Math.random() * 360))
@@ -26,6 +26,7 @@ export function GenerateurFormesSimples() {
         .padStart(6, "0")}`,
     )
   }
+  // Envoie une requete POST à Flask pour generer le motif
   const handleFlaskGenerate = async () => {
     const response = await fetch("http://localhost:5000/generer_formes_simples", {
       method: "POST",
@@ -39,7 +40,7 @@ export function GenerateurFormesSimples() {
         couleur: color,
       }),
     })
-
+    // Si la requete est reussie, on recupere l'image et on l'affiche
     if (response.ok) {
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
@@ -52,6 +53,7 @@ export function GenerateurFormesSimples() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* Partie qui gere l'image */}
       <Card className="md:col-span-2">
         <CardContent className="p-6">
           <div className="flex justify-center items-center bg-gray-50 rounded-lg p-4">
@@ -66,7 +68,7 @@ export function GenerateurFormesSimples() {
           </div>
         </CardContent>
       </Card>
-
+      {/* Partie qui gere les parametres */}
       <div className="space-y-6">
         <Tabs defaultValue="basic" className="w-full">
           <TabsList className="grid w-full grid-cols-2">
